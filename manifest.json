@@ -1,0 +1,47 @@
+﻿{
+	"manifest_version": 2,
+	"name": "PShort",
+	"version": "7",
+	"description": "Rút gọn link với PShort của Prosoft",
+	"icons": {"192": "icon.png"},
+	"permissions": [
+		"tabs", "contextMenus", "*://*/*"
+	],
+	"browser_action": {
+		"default_icon": "icon.png",
+		"default_title": "Bấm để rút gọn link này !",
+		"default_popup": "popup.html"
+	},
+	"background": {
+		"scripts": ["background.js"],
+		"persistent": false
+	},
+	"web_accessible_resources": [
+		"linkhay.css",
+		"stickers/*"
+	  ],
+	"content_scripts":
+	[
+		{
+			"matches": ["*://*.linkhay.com/*"],
+			"css": ["linkhay.css"],
+			"js": [
+				"jquery-3.2.1.min.js"
+			],
+			"run_at" : "document_start"
+		},
+		{
+			"matches": ["*://*.linkhay.com/*"],
+			"js": [
+				"util.js",
+				"sticker.js",
+				"pageInfo.js",
+				"sites.js",
+				"clean.js",
+				"improve.js",
+				"linkhay.js"
+			],
+			"run_at" : "document_end"
+		}
+	]
+}
